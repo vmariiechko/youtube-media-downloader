@@ -35,3 +35,4 @@ requirements.txt
 
 # Downloaded content
 *.mp[3-4]
+downloads/
