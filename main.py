@@ -1,5 +1,9 @@
 """
-python main.py -pu "https://www.youtube.com/playlist?list=PLhvGGyZjDqHrmlkJESdvuJkdNvTJnDQ8N"
+python main.py playlist \
+    --url "https://www.youtube.com/playlist?list=PLhvGGyZjDqHrmlkJESdvuJkdNvTJnDQ8N" \
+    --separate_channel_folders
+
+python main.py video --url "https://www.youtube.com/watch?v=XraHq2j2yps"
 """
 
 import argparse
@@ -14,22 +18,33 @@ if __name__ == "__main__":
     logger = setup_logger()
     parser = argparse.ArgumentParser(description="YouTube playlist downloader")
 
-    parser.add_argument("-vu", "--video_url", help="YouTube video URL to download")
-    parser.add_argument("-pu", "--playlist_url", help="YouTube playlist URL to download")
+    subparsers = parser.add_subparsers(dest="type", required=True, title="commands")
+
+    video_parser = subparsers.add_parser("video", help="Download a YouTube video")
+    video_parser.add_argument("-u", "--url", required=True, help="YouTube video URL to download")
+
+    playlist_parser = subparsers.add_parser("playlist", help="Download a YouTube playlist")
+    playlist_parser.add_argument(
+        "-u", "--url", required=True, help="YouTube playlist URL to download"
+    )
+    playlist_parser.add_argument(
+        "-scf",
+        "--separate_channel_folders",
+        action="store_true",
+        help="Separate downloaded content to channel folders",
+    )
+
     args = parser.parse_args()
 
-    if args.video_url:
-        try:
-            YouTubeVideo(
-                args.video_url, logger, output_path="downloads", quick_download=True
-            ).download_audio()
-        except PytubeError as e:
-            logger.error(f"An error occurred while downloading the audio:\n{e.format_exc()}")
-
-    if args.playlist_url:
-        try:
+    try:
+        if args.type == "video":
+            YouTubeVideo(args.url, logger, output_path="downloads").download_audio()
+        elif args.type == "playlist":
             YouTubePlaylist(
-                args.playlist_url, logger, output_path="downloads", quick_download=True
-            ).download_audio()
-        except PytubeError as e:
-            logger.error(f"An error occurred while downloading the audio:\n{e.format_exc()}")
+                args.url,
+                logger,
+                output_path="downloads",
+                separate_channel_folders=args.separate_channel_folders,
+            ).download_audios()
+    except PytubeError as e:
+        logger.error(f"An error occurred while downloading the audio:\n{e.format_exc()}")
