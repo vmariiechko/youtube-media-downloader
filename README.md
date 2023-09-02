@@ -1,4 +1,6 @@
 # TODO
-* Convert .mp4 to .mp3 for audio
 * Check if playlist is private
-* Decided what to do when download a file that already exists
+
+# Smart download features:
+* All Videos that start from some text, or contain text in title
+* Range of videos. Starting From some point To the ending point in playlist

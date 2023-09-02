@@ -2,13 +2,13 @@ import logging
 
 
 def setup_logger() -> logging.Logger:
-
     logger = logging.getLogger(__name__)
+
     logger.setLevel(logging.DEBUG)
 
-    formatter = logging.Formatter(u'%(asctime)s - %(levelname)s - %(message)s')
+    formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
 
-    file_handler = logging.FileHandler('app.log', encoding='utf-8')
+    file_handler = logging.FileHandler("app.log", encoding="utf-8")
     file_handler.setLevel(logging.DEBUG)
     file_handler.setFormatter(formatter)
 
