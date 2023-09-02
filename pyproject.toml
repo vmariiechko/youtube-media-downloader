@@ -1,0 +1,21 @@
+[tool.black]
+line-length = 100
+
+[tool.poetry]
+name = "youtube-downloader"
+version = "0.1.0"
+description = ""
+authors = ["Vadym Mariiechko <vadym.mariiechko@gmail.com>"]
+readme = "README.md"
+packages = [{include = "youtube_downloader"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pytube = "^15.0.0"
+moviepy = "^1.0.3"
+mutagen = "^1.46.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
