@@ -12,8 +12,6 @@ packages = [{include = "youtube_downloader"}]
 [tool.poetry.dependencies]
 python = "^3.11"
 pytube = "^15.0.0"
-moviepy = "^1.0.3"
-mutagen = "^1.46.0"
 
 
 [build-system]
