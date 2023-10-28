@@ -1,7 +1,11 @@
 """
-python main.py playlist \
+
+To exec CLI, from project root run:
+```
+python -m youtube_media_downloader.cli.main playlist \
     --url "https://www.youtube.com/playlist?list=PLhvGGyZjDqHrmlkJESdvuJkdNvTJnDQ8N" \
     --separate_channel_folders
+```
 
 python main.py video --url "https://www.youtube.com/watch?v=XraHq2j2yps"
 """
@@ -10,9 +14,9 @@ import argparse
 
 from pytube.exceptions import PytubeError
 
-from logger import setup_logger
-from youtube.playlist import YouTubePlaylist
-from youtube.video import YouTubeVideo
+from ..utils.logger import setup_logger
+from ..youtube.playlist import YouTubePlaylist
+from ..youtube.video import YouTubeVideo
 
 if __name__ == "__main__":
     logger = setup_logger()
