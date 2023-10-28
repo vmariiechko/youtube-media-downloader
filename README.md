@@ -1,6 +1,11 @@
-# TODO
+# YouTube Media Downloader
+
+## TODO
 * Check if playlist is private
 
-# Smart download features:
-* All Videos that start from some text, or contain text in title
-* Range of videos. Starting From some point To the ending point in playlist
+## Feature ideas:
+* Allow users to download videos from a provided playlist link based on:
+  * Videos that start with the specified text.
+  * Videos that contain the specified text in their title.
+* Enable downloading a range of videos from a playlist by specifying a start and end point.
+* GUI interface
