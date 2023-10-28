@@ -12,6 +12,7 @@ YouTube Media Downloader allows users to download audio from YouTube. Whether it
   - [Table of Contents](#table-of-contents)
   - [Features](#features)
   - [Installation](#installation)
+  - [Latest Release](#latest-release)
   - [Usage](#usage)
     - [GUI](#gui)
     - [CLI](#cli)
@@ -48,6 +49,12 @@ cd youtube-media-downloader
 ```bash
 poetry install
 ```
+
+---
+
+## Latest Release
+
+Download the initial release of YouTube Media Downloader - v1.0.0 from [here][releases-url].
 
 ---
 
@@ -110,6 +117,7 @@ This project is licensed under the terms of the **MIT** license.
 
 <!-- Markdown links and images -->
 [license-url]: https://github.com/vmariiechko/youtube-media-downloader/blob/main/LICENSE
+[releases-url]: https://github.com/vmariiechko/youtube-media-downloader/releases/tag/v1.0.0
 
 [demo-start]: https://imgur.com/TeJZLuE.png
 [demo-success]: https://imgur.com/lSOsHCS.png
