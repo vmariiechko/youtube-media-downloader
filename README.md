@@ -8,4 +8,3 @@
   * Videos that start with the specified text.
   * Videos that contain the specified text in their title.
 * Enable downloading a range of videos from a playlist by specifying a start and end point.
-* GUI interface

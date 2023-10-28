@@ -10,8 +10,10 @@ readme = "README.md"
 packages = [{include = "youtube_downloader"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.11,<3.13"
 pytube = "^15.0.0"
+pyside6 = "^6.6.0"
+qt-material = "^2.14"
 
 
 [build-system]
