@@ -25,3 +25,6 @@ python -m youtube_media_downloader.cli.main playlist \
     --url "https://www.youtube.com/playlist?list=PLhvGGyZjDqHrmlkJESdvuJkdNvTJnDQ8N" \
     --separate_channel_folders
 ```
+
+## Distribution
+To package GUI app, run: `python package.py`

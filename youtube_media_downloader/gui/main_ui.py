@@ -14,7 +14,7 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from .config import ICONS_PATH, STATIC_PATH
+from youtube_media_downloader.gui.config import ICONS_PATH, STATIC_PATH
 
 
 class MainWindowUI(QMainWindow):
@@ -22,7 +22,7 @@ class MainWindowUI(QMainWindow):
         super().__init__()
 
         self.setWindowTitle("YouTube Media Downloader")
-        self.setWindowIcon(QIcon(str(ICONS_PATH / "app_icon.png")))
+        self.setWindowIcon(QIcon(str(ICONS_PATH / "app_icon.ico")))
         self.resize(700, 300)
 
         self.central_widget = QWidget(self)

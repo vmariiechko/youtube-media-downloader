@@ -8,7 +8,7 @@ def setup_logger() -> logging.Logger:
 
     formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
 
-    file_handler = logging.FileHandler("app.log", encoding="utf-8")
+    file_handler = logging.FileHandler("YouTube Media Downloader.log", encoding="utf-8")
     file_handler.setLevel(logging.DEBUG)
     file_handler.setFormatter(formatter)
 

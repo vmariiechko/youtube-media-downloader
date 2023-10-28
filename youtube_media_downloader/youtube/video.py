@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytube
 
-from .base import YouTubeBase
+from youtube_media_downloader.youtube.base import YouTubeBase
 
 
 class YouTubeVideo(YouTubeBase):

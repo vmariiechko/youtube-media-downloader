@@ -3,10 +3,10 @@ import sys
 from PySide6.QtWidgets import QApplication, QFileDialog, QMessageBox
 from qt_material import apply_stylesheet
 
-from ..utils.logger import setup_logger
-from .config import STATIC_PATH
-from .main_ui import MainWindowUI
-from .workers import DownloadWorker
+from youtube_media_downloader.gui.config import STATIC_PATH
+from youtube_media_downloader.gui.main_ui import MainWindowUI
+from youtube_media_downloader.gui.workers import DownloadWorker
+from youtube_media_downloader.utils.logger import setup_logger
 
 logger = setup_logger()
 

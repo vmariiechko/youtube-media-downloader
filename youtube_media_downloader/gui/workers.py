@@ -1,9 +1,9 @@
 from PySide6.QtCore import QThread, Signal
 from pytube.exceptions import PytubeError
 
-from ..utils.logger import setup_logger
-from ..youtube.playlist import YouTubePlaylist
-from ..youtube.video import YouTubeVideo
+from youtube_media_downloader.utils.logger import setup_logger
+from youtube_media_downloader.youtube.playlist import YouTubePlaylist
+from youtube_media_downloader.youtube.video import YouTubeVideo
 
 logger = setup_logger()
 
