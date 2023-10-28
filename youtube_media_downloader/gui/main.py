@@ -10,21 +10,19 @@ python -m youtube_media_downloader.gui.main
 import sys
 
 from PySide6.QtWidgets import QApplication, QFileDialog, QMessageBox
-from pytube.exceptions import PytubeError
 from qt_material import apply_stylesheet
 
 from ..utils.logger import setup_logger
-from ..youtube.playlist import YouTubePlaylist
-from ..youtube.video import YouTubeVideo
 from .config import STATIC_PATH
 from .main_ui import MainWindowUI
+from .workers import DownloadWorker
+
+logger = setup_logger()
 
 
 class MainWindow(MainWindowUI):
     def __init__(self):
         super().__init__()
-        self.logger = setup_logger()
-
         self.browse_output_button.clicked.connect(self.browse_output_path)
         self.download_button.clicked.connect(self.start_download)
         self.worker = None
@@ -34,6 +32,28 @@ class MainWindow(MainWindowUI):
         if directory:
             self.output_path_label.setText(directory)
 
+    def _disable_ui(self, disable):
+        """Helper method to disable/enable UI elements"""
+
+        self.url_input.setEnabled(not disable)
+        self.download_button.setEnabled(not disable)
+        self.browse_output_button.setEnabled(not disable)
+        self.playlist_input_radio.setEnabled(not disable)
+        self.video_input_radio.setEnabled(not disable)
+        self.audio_output_radio.setEnabled(not disable)
+        self.video_output_radio.setEnabled(not disable)
+        self.separate_channel_checkbox.setEnabled(
+            not disable and self.playlist_input_radio.isChecked()
+        )
+
+    def on_download_finished(self, success, message):
+        self.stop_loading_spinner()
+        self._disable_ui(False)
+        if success:
+            QMessageBox.information(self, "Success", message)
+        else:
+            QMessageBox.critical(self, "Error", message)
+
     def start_download(self):
         url = self.url_input.text()
         output_directory = self.output_path_label.text()
@@ -42,41 +62,22 @@ class MainWindow(MainWindowUI):
             QMessageBox.warning(self, "Warning", "Please enter a YouTube URL.")
             return
 
-        try:
-            # Download YouTube video
-            if self.video_input_radio.isChecked():
-                if self.audio_output_radio.isChecked():
-                    YouTubeVideo(url, self.logger, output_path=output_directory).download_audio()
-                    QMessageBox.information(self, "Success", "Video audio downloaded successfully!")
-                # TODO handle video download when the feature added
+        self.worker = DownloadWorker(
+            url,
+            self.video_input_radio.isChecked(),
+            self.audio_output_radio.isChecked(),
+            output_directory,
+            self.separate_channel_checkbox.isChecked(),
+        )
+        self.worker.finished_signal.connect(self.on_download_finished)
 
-            # Download YouTube playlist
-            elif self.playlist_input_radio.isChecked():
-                separate_channels = self.separate_channel_checkbox.isChecked()
-
-                if self.audio_output_radio.isChecked():
-                    YouTubePlaylist(
-                        url,
-                        self.logger,
-                        output_path=output_directory,
-                        separate_channel_folders=separate_channels,
-                    ).download_audios()
-                    QMessageBox.information(
-                        self,
-                        "Success",
-                        "Playlist audios downloaded successfully!\nHappy listening :)",
-                    )
-                # TODO handle playlist video download when the feature added
-
-        except PytubeError:
-            QMessageBox.critical(
-                self,
-                "Error",
-                "An error occurred while downloading. Please check the URL and try again.",
-            )
+        self._disable_ui(True)
+        self.start_loading_spinner()
+        self.worker.start()
 
 
 if __name__ == "__main__":
+    logger.info("Starting GUI...")
     app = QApplication(sys.argv)
     window = MainWindow()
     apply_stylesheet(app, theme=str(STATIC_PATH / "gui_theme.xml"), invert_secondary=True)

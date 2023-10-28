@@ -1,5 +1,5 @@
-from PySide6.QtCore import Qt
-from PySide6.QtGui import QIcon
+from PySide6.QtCore import QSize, Qt
+from PySide6.QtGui import QIcon, QMovie
 from PySide6.QtWidgets import (
     QCheckBox,
     QGroupBox,
@@ -14,7 +14,7 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from .config import ICONS_PATH
+from .config import ICONS_PATH, STATIC_PATH
 
 
 class MainWindowUI(QMainWindow):
@@ -22,11 +22,17 @@ class MainWindowUI(QMainWindow):
         super().__init__()
 
         self.setWindowTitle("YouTube Media Downloader")
-        self.setWindowIcon(QIcon(str(ICONS_PATH / "app-icon.png")))
+        self.setWindowIcon(QIcon(str(ICONS_PATH / "app_icon.png")))
         self.resize(700, 300)
 
         self.central_widget = QWidget(self)
         self.main_layout = QVBoxLayout(self.central_widget)
+
+        # Loading Spinner Setup
+        self.loading_movie = QMovie(str(STATIC_PATH / "loading_spinner.gif"))
+        self.loading_movie.setScaledSize(QSize(30, 30))
+        self.loading_label = QLabel(self, visible=False)
+        self.loading_label.setMovie(self.loading_movie)
 
         # Create a URL input and Download button
         self.url_layout = QHBoxLayout()
@@ -38,6 +44,7 @@ class MainWindowUI(QMainWindow):
         self.download_button = QPushButton("Download", self)
         self.url_layout.addWidget(self.download_button)
 
+        self.url_layout.addWidget(self.loading_label)
         self.main_layout.addLayout(self.url_layout)
 
         # Create Output Path controls
@@ -93,5 +100,13 @@ class MainWindowUI(QMainWindow):
     def toggle_separate_channel_checkbox(self, checked):
         """Enable or Disable the separate_channel_checkbox based on Playlist radio button state."""
         self.separate_channel_checkbox.setEnabled(checked)
-        """Enable or Disable the separate_channel_checkbox based on Playlist radio button state."""
-        self.separate_channel_checkbox.setEnabled(checked)
+
+    def start_loading_spinner(self):
+        """Start the loading spinner animation."""
+        self.loading_label.show()
+        self.loading_movie.start()
+
+    def stop_loading_spinner(self):
+        """Stop the loading spinner animation and hide the label."""
+        self.loading_movie.stop()
+        self.loading_label.hide()

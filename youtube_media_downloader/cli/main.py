@@ -18,8 +18,10 @@ from ..utils.logger import setup_logger
 from ..youtube.playlist import YouTubePlaylist
 from ..youtube.video import YouTubeVideo
 
+logger = setup_logger()
+
 if __name__ == "__main__":
-    logger = setup_logger()
+    logger.info("Starting CLI...")
     parser = argparse.ArgumentParser(description="YouTube playlist downloader")
 
     subparsers = parser.add_subparsers(dest="type", required=True, title="commands")

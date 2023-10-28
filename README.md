@@ -2,6 +2,7 @@
 
 ## TODO
 * Check if playlist is private
+* Handle case when selected to download playlist, but provided link was video
 
 ## Feature ideas:
 * Allow users to download videos from a provided playlist link based on:
