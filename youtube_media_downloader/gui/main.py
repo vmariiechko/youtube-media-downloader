@@ -1,12 +1,3 @@
-"""
-
-To exec CLI, from project root run:
-```
-python -m youtube_media_downloader.gui.main
-```
-"""
-
-
 import sys
 
 from PySide6.QtWidgets import QApplication, QFileDialog, QMessageBox

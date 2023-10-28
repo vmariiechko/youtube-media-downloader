@@ -1,15 +1,3 @@
-"""
-
-To exec CLI, from project root run:
-```
-python -m youtube_media_downloader.cli.main playlist \
-    --url "https://www.youtube.com/playlist?list=PLhvGGyZjDqHrmlkJESdvuJkdNvTJnDQ8N" \
-    --separate_channel_folders
-```
-
-python main.py video --url "https://www.youtube.com/watch?v=XraHq2j2yps"
-"""
-
 import argparse
 
 from pytube.exceptions import PytubeError
