@@ -32,7 +32,7 @@ class MainWindow(MainWindowUI):
         self.playlist_input_radio.setEnabled(not disable)
         self.video_input_radio.setEnabled(not disable)
         self.audio_output_radio.setEnabled(not disable)
-        self.video_output_radio.setEnabled(not disable)
+        # self.video_output_radio.setEnabled(not disable)
         self.separate_channel_checkbox.setEnabled(
             not disable and self.playlist_input_radio.isChecked()
         )

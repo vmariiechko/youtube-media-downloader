@@ -112,4 +112,4 @@ This project is licensed under the terms of the **MIT** license.
 [license-url]: https://github.com/vmariiechko/youtube-media-downloader/blob/main/LICENSE
 
 [demo-start]: https://imgur.com/TeJZLuE.png
-[demo-success]: https://imgur.com/Zb5mxX4.png
+[demo-success]: https://imgur.com/lSOsHCS.png
